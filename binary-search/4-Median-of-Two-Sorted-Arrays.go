@@ -1,60 +1,54 @@
+import (
+\t\fmt\
+\t\math\
+)
 func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
-\tif len(nums1) > len(nums2) {
-\t\tnums1, nums2 = nums2, nums1
-\t}
+    if len(nums1) > len(nums2) {
+        nums1, nums2 = nums2, nums1
+    }
 
-\tm, n := len(nums1), len(nums2)
-\tlow, high := 0, m
+    m, n := len(nums1), len(nums2)
+    low, high := 0, m
 
-\tfor low <= high {
-\t\tpartitionX := (low + high) / 2
-\t\tpartitionY := (m + n + 1) / 2 - partitionX
+    for low <= high {
+        partitionSmallArray := (low + high) / 2
+        partitionLargeArray := (m + n + 1) / 2 - partitionSmallArray
 
-\t\tmaxX := math.MinInt64
-\t\tif partitionX > 0 {
-\t\t\tmaxX = nums1[partitionX-1]
+        maxLeftSmall := math.Inf(-1)
+\t\tif partitionSmallArray > 0 {
+\t\t\tmaxLeftSmall = float64(nums1[partitionSmallArray-1])
 \t\t}
 
-\t\tminX := math.MaxInt64
-\t\tif partitionX < m {
-\t\t\tminX = nums1[partitionX]
+\t\tminRightSmall := math.Inf(1)
+\t\tif partitionSmallArray < m {
+\t\t\tminRightSmall = float64(nums1[partitionSmallArray])
 \t\t}
 
-\t\tmaxY := math.MinInt64
-\t\tif partitionY > 0 {
-\t\t\tmaxY = nums2[partitionY-1]
+\t\tmaxLeftLarge := math.Inf(-1)
+\t\tif partitionLargeArray > 0 {
+\t\t\tmaxLeftLarge = float64(nums2[partitionLargeArray-1])
 \t\t}
 
-\t\tminY := math.MaxInt64
-\t\tif partitionY < n {
-\t\t\tminY = nums2[partitionY]
+\t\tminRightLarge := math.Inf(1)
+\t\tif partitionLargeArray < n {
+\t\t\tminRightLarge = float64(nums2[partitionLargeArray])
 \t\t}
 
-\t\tif maxX <= minY && maxY <= minX {
+        if maxLeftSmall <= minRightLarge && maxLeftLarge <= minRightSmall {
+\t\t\t// If total number of elements is even
 \t\t\tif (m+n)%2 == 0 {
-\t\t\t\treturn (float64(max(maxX, maxY)) + float64(min(minX, minY))) / 2.0
+\t\t\t\treturn (math.Max(maxLeftSmall, maxLeftLarge) + math.Min(minRightSmall, minRightLarge)) / 2
 \t\t\t}
-\t\t\treturn float64(max(maxX, maxY))
-\t\t} else if maxX > minY {
-\t\t\thigh = partitionX - 1
+\t\t\t// If total number of elements is odd
+\t\t\treturn math.Max(maxLeftSmall, maxLeftLarge)
+\t\t} else if maxLeftSmall > minRightLarge {
+\t\t\t// Move partition left in the smaller array
+\t\t\thigh = partitionSmallArray - 1
 \t\t} else {
-\t\t\tlow = partitionX + 1
+\t\t\t// Move partition right in the smaller array
+\t\t\tlow = partitionSmallArray + 1
 \t\t}
-\t}
+    }
 
-\treturn 0.0
-}
-
-func max(a, b int) int {
-\tif a > b {
-\t\treturn a
-\t}
-\treturn b
-}
-
-func min(a, b int) int {
-\tif a < b {
-\t\treturn a
-\t}
-\treturn b
+    return 0.0
 }
