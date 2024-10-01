@@ -1,19 +1,18 @@
 class Solution:
     def validPalindrome(self, s: str) -> bool:
-        left, right = 0, len(s) - 1
-        while left <= right:
-            if s[left] != s[right]:
-                return self.validPalindromeUtil(s, left + 1, right) or self.validPalindromeUtil(s, left, right - 1)
-            else:
+        def isPalindromeRange(s: str, left: int, right: int) -> bool:
+            while left < right:
+                if s[left] != s[right]:
+                    return False
                 left += 1
                 right -= 1
-        return True
-        
-    def validPalindromeUtil(self, s: str, l: int, r: int) -> bool:
-        while l <= r:
-            if s[l] != s[r]:
-                return False
-            else:
-                l += 1
-                r -= 1
+            return True
+
+        left, right = 0, len(s) - 1
+        while left < right:
+            if s[left] != s[right]:
+                # Check by skipping one character either from the left or the right
+                return isPalindromeRange(s, left + 1, right) or isPalindromeRange(s, left, right - 1)
+            left += 1
+            right -= 1
         return True
