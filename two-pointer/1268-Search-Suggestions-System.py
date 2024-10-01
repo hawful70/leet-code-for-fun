@@ -2,18 +2,16 @@ class Solution:
     def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
         res = []
         products.sort()
-        left, right = 0, len(products) - 1
+        l, r = 0, len(products) - 1
         for i in range(len(searchWord)):
-            s = searchWord[i]
-            
-            # eliminate unmatching word
-            while left <= right and (len(products[left]) <= i or products[left][i] != s):
-                left += 1
-            while left <= right and (len(products[right]) <= i or products[right][i] != s):
-                right -= 1
+            c = searchWord[i]
+            while l <= r and (len(products[l]) <= i or products[l][i] != c):
+                l += 1
+            while l <= r and (len(products[r]) <= i or products[r][i] != c):
+                r -= 1
 
             res.append([])
-            remain = right - left + 1
+            remain = r - l + 1
             for j in range(min(3, remain)):
-                res[-1].append(products[left + j])
+                res[-1].append(products[l + j])
         return res
