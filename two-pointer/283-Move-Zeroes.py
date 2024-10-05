@@ -4,7 +4,7 @@ class Solution:
         Do not return anything, modify nums in-place instead.
         \\\
         if len(nums) == 1:
-            return nums
+            return
         found = 0
         for i in range(1, len(nums)):
             if nums[found] != nums[i] and nums[found] == 0:
