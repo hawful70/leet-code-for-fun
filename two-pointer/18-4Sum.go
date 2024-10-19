@@ -3,46 +3,44 @@ func fourSum(nums []int, target int) [][]int {
     var result []int
 
     sort.Ints(nums)
-    backtrack(nums, 0, target, 4, result, &results)
+    backtrack(nums, 4, target, 0, len(nums) - 1, result, &results)
     return results
 }
 
-func backtrack(nums []int, start, target, N int, result []int, results *[][]int) {
-    if N < 2 || start >= len(nums) || nums[start] * N > target || target > nums[len(nums) - 1] * N {
+func backtrack(nums []int, N int, target int, left int, right int, result []int, results *[][]int) {
+    if right - left + 1 < N || N < 2 || target < nums[left] * N || target > nums[right] * N {
         return
     }
 
     if N == 2 {
-        left, right := start, len(nums) - 1
         for left < right {
-            sum := nums[left] + nums[right]
-            if sum == target {
+            s := nums[left] + nums[right]
+            if s == target {
                 temp := make([]int, len(result))
                 copy(temp, result)
 
                 temp = append(temp, nums[left], nums[right])
                 *results = append(*results, temp)
                 left++
-
                 for left < right && nums[left] == nums[left - 1] {
                     left++
                 }
-            } else if sum < target {
-                left++
-            } else {
+            } else if s > target {
                 right--
+            } else {
+                left++
             }
         }
-        return
-    }
+    } else {
+        for i := left; i < len(nums); i++ {
+            if i > left && nums[i] == nums[i - 1] {
+                continue
+            }
 
-    for i := start; i < len(nums) - N + 1; i++ {
-        if i > start && nums[i] == nums[i - 1] {
-            continue
-        }
-
-        result = append(result, nums[i])
-        backtrack(nums, i + 1, target - nums[i], N - 1, result, results)
-        result = result[:len(result) - 1]
+            result = append(result, nums[i])
+            backtrack(nums, N - 1, target - nums[i], i + 1, len(nums) - 1, result, results)
+            result = result[:len(result) - 1]
+        } 
     }
 }
+
