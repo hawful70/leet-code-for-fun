@@ -1,14 +1,12 @@
 func numSubseq(nums []int, target int) int {
     const mod = 1000000007
-    sort.Ints(nums)
-
     ans := 0
+    sort.Ints(nums)
     left, right := 0, len(nums) - 1
     for left <= right {
-        sum := nums[left] + nums[right]
-        if sum <= target {
-            ans += modPow(2, right - left, mod)
-            ans = ans % mod
+        if nums[left] + nums[right] <= target {
+            ans += powMod(2, right - left, mod)
+            ans %= mod
             left++
         } else {
             right--
@@ -17,15 +15,15 @@ func numSubseq(nums []int, target int) int {
     return ans
 }
 
-func modPow(base, exp, mod int) int {
+func powMod(base, exp, mod int) int {
     result := 1
     base = base % mod
     for exp > 0 {
-        if exp % 2 == 1 { // If exp is odd
+        if exp % 2 == 1 {
             result = (result * base) % mod
         }
-        base = (base * base) % mod // Square the base
-        exp = exp / 2
+        exp = exp >> 1
+        base = (base * base) % mod
     }
     return result
 }
