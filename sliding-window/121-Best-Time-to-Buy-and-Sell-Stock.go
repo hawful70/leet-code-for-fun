@@ -1,15 +1,14 @@
 func maxProfit(prices []int) int {
-    profit := 0
     left := 0
+    ans := 0
     for right, price := range prices {
         if prices[left] > price {
             left = right
         } else {
-            currentProfit := price - prices[left]
-            profit = max(profit, currentProfit)
+            ans = max(ans, price - prices[left])
         }
     }
-    return profit
+    return ans
 }
 
 func max(a int, b int) int {
