@@ -1,11 +1,15 @@
-# LeetCode
+# LeetCode Solutions
 
-This repository contains my solutions to LeetCode problems.
+This repository contains my solutions to LeetCode problems, implemented in various programming languages.
 
-Created with :heart: by [LeetPush](https://github.com/husamahmud/LeetPush)
+## Languages Used
+- **Golang** - Current main language for solutions.
+- **Python** - Additional solutions provided here.
+- **Rust** - Coming soon!
+- **Javascript** - Coming soon!
 
- ## Made by 
- - Tut: [GitHub](https://github.com/TutTrue) - [LinkedIn](https://www.linkedin.com/in/mahmoud-hamdy-8b6825245/)
- - Hüsam: [GitHub](https://github.com/husamahmud) - [LinkedIn](https://www.linkedin.com/in/husamahmud/)
+## About
+This repository is a personal archive of coding problem solutions and showcases my progress in problem-solving and language proficiency. I hope these solutions may also serve as a helpful reference for others.
 
- Happy coding! 🚀
+Happy coding! 🚀
+
