@@ -1,18 +1,20 @@
 func maxFrequency(nums []int, k int) int {
     sort.Ints(nums)
-    frequency := 0
-    left := 0
     total := 0
-    for right, num := range nums {
-        total += num
+    frequency := 0
+
+    left := 0
+    for right, _ := range nums {
+        total += nums[right]
 
         for nums[right] * (right - left + 1) - total > k {
             total -= nums[left]
-            left += 1
+            left++
         }
 
         frequency = max(frequency, right - left + 1)
     }
+
     return frequency
 }
 
