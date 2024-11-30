@@ -1,36 +1,37 @@
 func evalRPN(tokens []string) int {
-    var stacks []int
     if len(tokens) <= 1 {
-        number, _ := strconv.Atoi(tokens[0])
-        return number
+        value, _ := strconv.Atoi(tokens[0])
+        return value
     }
 
-    for _, c := range tokens {
-        switch c {
-        case \+\:
-            a := stacks[len(stacks) - 1]
-            b := stacks[len(stacks) - 2]
-            stacks = stacks[:len(stacks) - 2]
-            stacks = append(stacks, a + b)
-        case \-\:
-            a := stacks[len(stacks) - 1]
-            b := stacks[len(stacks) - 2]
-            stacks = stacks[:len(stacks) - 2]
-            stacks = append(stacks, b - a)
-        case \*\:
-            a := stacks[len(stacks) - 1]
-            b := stacks[len(stacks) - 2]
-            stacks = stacks[:len(stacks) - 2]
-            stacks = append(stacks, a * b)
-        case \/\:
-            a := stacks[len(stacks) - 1]
-            b := stacks[len(stacks) - 2]
-            stacks = stacks[:len(stacks) - 2]
-            stacks = append(stacks, b / a)
-        default:
-            number, _ := strconv.Atoi(c)
-            stacks = append(stacks, number)
-        } 
+    var stacks []int
+    for _, token := range tokens {
+        switch token {
+            case \+\:
+                firstNumber := stacks[len(stacks) - 1]
+                secondNumber := stacks[len(stacks) - 2]
+                stacks = stacks[:len(stacks) - 2]
+                stacks = append(stacks, secondNumber + firstNumber)
+            case \-\:
+                firstNumber := stacks[len(stacks) - 1]
+                secondNumber := stacks[len(stacks) - 2]
+                stacks = stacks[:len(stacks) - 2]
+                stacks = append(stacks, secondNumber - firstNumber)
+            case \*\:
+                firstNumber := stacks[len(stacks) - 1]
+                secondNumber := stacks[len(stacks) - 2]
+                stacks = stacks[:len(stacks) - 2]
+                stacks = append(stacks, secondNumber * firstNumber)
+            case \/\:
+                firstNumber := stacks[len(stacks) - 1]
+                secondNumber := stacks[len(stacks) - 2]
+                stacks = stacks[:len(stacks) - 2]
+                stacks = append(stacks, secondNumber / firstNumber)
+            default:
+                number, _ := strconv.Atoi(token)
+                stacks = append(stacks, number)
+        }
     }
+
     return stacks[len(stacks) - 1]
 }
