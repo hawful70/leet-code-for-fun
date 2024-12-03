@@ -1,27 +1,25 @@
 func totalFruit(fruits []int) int {
-    trees := make(map[int]int, 3)
-
-    left, maxFruits := 0, 0
-    
-    for right, fruit := range fruits {
-        if _, exist := trees[fruit]; !exist {
-            trees[fruit] = 1
+    type_fruit := make(map[int]int)
+    res, left := 0, 0
+    for right, _ := range fruits {
+        if _, found := type_fruit[fruits[right]]; found {
+            type_fruit[fruits[right]]++
         } else {
-            trees[fruit]++
+            type_fruit[fruits[right]] = 1
         }
 
-        for len(trees) > 2 {
-            trees[fruits[left]]--
-            if trees[fruits[left]] == 0 {
-                delete(trees, fruits[left])
+        if len(type_fruit) > 2 {
+            type_fruit[fruits[left]]--
+
+            if type_fruit[fruits[left]] == 0 {
+                delete(type_fruit, fruits[left])
             }
             left++
         }
 
-        maxFruits = max(maxFruits, right - left + 1)
+        res = max(res, right - left + 1)
     }
-
-    return maxFruits
+    return res
 }
 
 func max(a int, b int) int {
