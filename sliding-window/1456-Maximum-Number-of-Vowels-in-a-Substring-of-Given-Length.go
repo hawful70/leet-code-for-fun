@@ -1,29 +1,32 @@
 func maxVowels(s string, k int) int {
-    vowelLetters := map[string]int{
-        "a": 1,
-        "e": 1,
-        "i": 1,
-        "o": 1,
-        "u": 1,
-    }
+    left := 0
+    res := 0
+    current_vowel := 0
 
-    total := 0
-    maxNumber, left := 0, 0
     for right, _ := range s {
-        if _, found := vowelLetters[string(s[right])]; found {
-            total += 1
+        if isVowel(rune(s[right])) {
+            if isVowel(rune(s[right])) {
+                current_vowel++
+            }
         }
 
-        if right - left + 1 > k {
-            if _, found := vowelLetters[string(s[left])]; found {
-                total -= 1
+        for right - left + 1 > k {
+            if isVowel(rune(s[left])) {
+                current_vowel--
             }
             left++
         }
 
-        maxNumber = max(maxNumber, total)
+        res = max(res, current_vowel)
     }
-    return maxNumber
+    return res
+}
+
+func isVowel(c rune) bool {
+    if c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' {
+        return true
+    }
+    return false
 }
 
 func max(a int, b int) int {
