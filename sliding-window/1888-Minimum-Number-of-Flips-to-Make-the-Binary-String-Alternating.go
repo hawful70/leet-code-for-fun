@@ -1,54 +1,61 @@
 func minFlips(s string) int {
-	n := len(s)
-	minFlip := n
-	window_size := n
+    minFlip := len(s)
 
-	// Extend the string for odd-length cases
-	if window_size % 2 != 0 {
-		s = s + s
-	}
+    window_size := len(s)
+    if window_size % 2 != 0 {
+        s = s + s
+    }
 
-	dif1, dif2 := 0, 0
-	left := 0
+    dif1, dif2 := 0, 0
+    left := 0
+    for right := 0; right < len(s); right++ {
+        var alternating1, alternating2 byte
+        if right % 2 == 0 {
+            alternating1 = '0'
+            alternating2 = '1'
+        } else {
+            alternating1 = '1'
+            alternating2 = '0'
+        }
 
-    fmt.Println("window_size", window_size)
-	for right := 0; right < len(s); right++ {
-		// Expected values for alternating patterns
-		expected1 := byte('0' + (right % 2)) // '0' if even index, '1' if odd index
-		expected2 := byte('1' - (right % 2)) // '1' if even index, '0' if odd index
+        if s[right] == alternating1 {
+            dif1++
+        }
+        if s[right] == alternating2 {
+            dif2++
+        }
 
-		// Count differences for both patterns
-		if s[right] != expected1 {
-			dif1++
-		}
-		if s[right] != expected2 {
-			dif2++
-		}
-        
-		// Check if the window size is valid
-		if right-left+1 == window_size {
+        if right - left + 1 == window_size {
+            if left % 2 == 0 {
+                alternating1 = '0'
+                alternating2 = '1'
+            } else {
+                alternating1 = '1'
+                alternating2 = '0'
+            }
+
             minFlip = min(minFlip, dif1, dif2)
-			if s[left] != byte('0'+(left%2)) {
-				dif1--
-			}
-			if s[left] != byte('1'-(left%2)) {
-				dif2--
-			}
-
-			left++
-		}
-	}
-
-	return minFlip
+            if s[left] == alternating1 {
+                dif1--
+            }
+            if s[left] == alternating2 {
+                dif2--
+            }
+            left++
+        }
+    }
+    return minFlip
 }
 
-// Helper function to find the minimum of three integers
-func min(a, b, c int) int {
-	if a < b && a < c {
-		return a
-	}
-	if b < c {
-		return b
-	}
-	return c
+func min(a int, b int, c int) int {
+    min := a
+    if min > b {
+        min = b
+    }
+
+    if min > c {
+        min = c
+    }
+
+    return min
 }
