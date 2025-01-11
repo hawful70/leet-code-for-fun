@@ -1,13 +1,22 @@
 func mergeAlternately(word1 string, word2 string) string {
-    var ans string
-    for len(word1) > 0 && len(word2) > 0 {
-        ans += string(word1[0])
-        ans += string(word2[0])
-        word1 = word1[1:]
-        word2 = word2[1:]
+    word1_pointer, word2_pointer := 0, 0
+    var res []rune
+    for word1_pointer < len(word1) && word2_pointer < len(word2) {
+        res = append(res, rune(word1[word1_pointer]))
+        res = append(res, rune(word2[word2_pointer]))
+        word1_pointer++
+        word2_pointer++
     }
 
-    ans += word1
-    ans += word2
-    return ans
+    for word1_pointer < len(word1) {
+        res = append(res, rune(word1[word1_pointer]))
+        word1_pointer++
+    }
+
+    for word2_pointer < len(word2) {
+        res = append(res, rune(word2[word2_pointer]))
+        word2_pointer++
+    }
+
+    return string(res)
 }
