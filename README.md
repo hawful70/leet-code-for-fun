@@ -1,11 +1,26 @@
-# LeetCode
+# LeetCode Solutions
 
-This repository contains my solutions to LeetCode problems.
+This repository contains my solutions to LeetCode problems, implemented in **Golang** and **Python**. I use this project to enhance my problem-solving skills and deepen my understanding of data structures and algorithms.
 
-Created with :heart: by [LeetPush](https://github.com/husamahmud/LeetPush)
+## 📌 About
+- **Languages:** Golang, Python
+- **Focus Areas:** Data Structures, Algorithms
+- **Goal:** Solve problems daily to improve coding proficiency and prepare for technical interviews.
 
- ## Made by 
- - Tut: [GitHub](https://github.com/TutTrue) - [LinkedIn](https://www.linkedin.com/in/mahmoud-hamdy-8b6825245/)
- - Hüsam: [GitHub](https://github.com/husamahmud) - [LinkedIn](https://www.linkedin.com/in/husamahmud/)
+## 🏆 Progress Tracking
+I aim to commit solutions regularly and cover various problem categories:
+- [ ] Arrays & Strings
+- [ ] Linked Lists
+- [ ] Trees & Graphs
+- [ ] Dynamic Programming
+- [ ] Greedy Algorithms
+- [ ] Backtracking
+- [ ] Heap & Stack
 
- Happy coding! 🚀
+## 🔗 References
+- [LeetCode](https://leetcode.com/)
+- [Golang Documentation](https://golang.org/doc/)
+- [Python Documentation](https://docs.python.org/3/)
+
+## 📜 License
+This repository is for personal learning and practice. Feel free to use and modify the solutions!
