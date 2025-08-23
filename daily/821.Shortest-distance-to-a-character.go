@@ -1,4 +1,4 @@
-package main
+package daily
 
 func shortestToChar(s string, c byte) []int {
 	answer := make([]int, len(s))

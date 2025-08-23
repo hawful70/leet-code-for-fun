@@ -1,4 +1,4 @@
-package main
+package daily
 
 func totalFruit(fruits []int) int {
 	type_fruit := make(map[int]int)
