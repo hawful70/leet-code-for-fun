@@ -1,33 +1,21 @@
+package daily
+
 func searchMatrix(matrix [][]int, target int) bool {
-    ROWS, COLS := len(matrix), len(matrix[0])
-
-    top, bottom := 0, ROWS - 1
-    for top <= bottom {
-        mid := (top + bottom) / 2
-        if matrix[mid][COLS - 1] < target {
-            top = mid + 1
-        } else if matrix[mid][0] > target {
-            bottom = mid - 1
-        } else {
-            break
-        }
-    }
-
-    if top > bottom {
-        return false
-    }
-
-    row := (top + bottom) / 2
-    left, right := 0, COLS - 1
-    for left <= right {
-        mid := (left + right) / 2
-        if matrix[row][mid] == target {
-            return true
-        } else if matrix[row][mid] > target {
-            right = mid - 1
-        } else {
-            left = mid + 1
-        }
-    }
-    return false
+	rows, cols := len(matrix), len(matrix[0])
+	for i := 0; i < rows; i++ {
+		if matrix[i][cols-1] >= target {
+			low, high := 0, cols-1
+			for low <= high {
+				mid := (low + high) / 2
+				if matrix[i][mid] == target {
+					return true
+				} else if matrix[i][mid] > target {
+					high = mid - 1
+				} else {
+					low = mid + 1
+				}
+			}
+		}
+	}
+	return false
 }
