@@ -14,3 +14,11 @@ func firstBadVersion(n int) int {
 	}
 	return ans
 }
+
+// Mock implementation of isBadVersion for local testing.
+// In the actual LeetCode environment, this is provided by the system.
+func isBadVersion(version int) bool {
+	// Change this value to test different scenarios
+	firstBad := 4
+	return version >= firstBad
+}
