@@ -6,7 +6,7 @@ type TopVotedCandidate struct {
 	leaders []int
 }
 
-func Constructor(persons []int, times []int) TopVotedCandidate {
+func ConstructorTopVotedCandidate(persons []int, times []int) TopVotedCandidate {
 	count := make(map[int]int)
 	maxVotes := 0
 	leader := -1
