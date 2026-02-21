@@ -8,14 +8,17 @@ func balancedString(s string) int {
 		outsideFrequency[s[i]]++
 	}
 
-	balanced := true
-	for i := 0; i < 4; i++ {
-		if outsideFrequency[byte('Q'+i)] > limit {
-			balanced = false
+	// Use a string to iterate through the target keys
+	targetChars := "QWER"
+
+	isBalanced := true
+	for _, char := range targetChars {
+		if outsideFrequency[byte(char)] > limit {
+			isBalanced = false
 			break
 		}
 	}
-	if balanced {
+	if isBalanced {
 		return 0
 	}
 
@@ -23,16 +26,21 @@ func balancedString(s string) int {
 	left := 0
 	for right := 0; right < n; right++ {
 		outsideFrequency[s[right]]--
-		for left < n {
+
+		// Manual "all" check
+		for left <= right { // Optimized: left shouldn't pass right
 			isFixable := true
-			for i := 0; i < 4; i++ {
-				if outsideFrequency[byte('Q'+i)] > limit {
+			for _, char := range targetChars {
+				if outsideFrequency[byte(char)] > limit {
 					isFixable = false
 					break
 				}
 			}
+
 			if isFixable {
-				res = min(res, right-left+1)
+				if right-left+1 < res {
+					res = right - left + 1
+				}
 				outsideFrequency[s[left]]++
 				left++
 			} else {
